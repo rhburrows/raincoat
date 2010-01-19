@@ -5,7 +5,8 @@ Feature: hooks runs all of the scripts in the hook's directory
   So that I can verify my code is in a good state at a given point
 
   Background:
-  Given an existing hook
+  Given a clean script directory
+  And an existing hook
 
   Scenario: No scripts in the hook directory
     Given an empty hook directory
