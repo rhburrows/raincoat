@@ -1,24 +1,6 @@
 require 'rubygems'
 
 begin
-  gem 'jeweler'
-  require 'jeweler'
-
-  Jeweler::Tasks.new do |gem|
-    gem.name = 'raincoat'
-    gem.summary = 'A way to package git-hooks with your project'
-    gem.description = gem.summary
-    gem.email = 'rhburrows@gmail.com'
-    gem.homepage = 'http://github.com/rhburrows/raincoat'
-    gem.authors = [ 'Ryan Burrows' ]
-  end
-
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler not available. Install it with: gem install jeweler"
-end
-
-begin
   require 'spec/rake/spectask'
   Spec::Rake::SpecTask.new do |t|
     t.spec_files = FileList['spec/**/*_spec.rb']
