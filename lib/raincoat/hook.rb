@@ -8,9 +8,9 @@ module Raincoat
 
     def run
       diff = git_diff.freeze
-      scripts.inject(true) do |result, script|
-        script.execute(diff) && result
-      end ? 0 : 1
+      scripts.inject(0) do |result, script|
+        result + script.call(diff)
+      end
     end
 
     def scripts
@@ -32,7 +32,7 @@ module Raincoat
 
     # Just like ActiveSupport's #classify
     def class_name_for(file_name)
-      file_name.sub(/\.rb$/, '').split(/_/).map{ |s| s.capitalize }.join('')
+      file_name.split(/\//).last.sub(/\.rb$/, '').split(/_/).map{ |s| s.capitalize }.join('')
     end
   end
 end

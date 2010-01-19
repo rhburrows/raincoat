@@ -15,8 +15,8 @@ module Raincoat
 
     describe "#run" do
       before(:each) do
-        @script_one = double("Script 1", :execute => true)
-        @script_two = double("Script 2", :execute => true)
+        @script_one = double("Script 1", :call => 0)
+        @script_two = double("Script 2", :call => 0)
         @hook.stub!(:scripts).and_return([@script_one, @script_two])
         @hook.stub!(:git_diff).and_return("diff")
       end
@@ -26,15 +26,15 @@ module Raincoat
         @hook.run
       end
 
-      it "calls execute on each script passing it the diff" do
-        @script_one.should_receive(:execute).with("diff")
-        @script_two.should_receive(:execute).with("diff")
+      it "calls #call on each script passing it the diff" do
+        @script_one.should_receive(:call).with("diff")
+        @script_two.should_receive(:call).with("diff")
         @hook.run
       end
 
       it "doesn't short-circuit" do
-        @script_one.stub!(:execute).and_return(false)
-        @script_two.should_receive(:execute).with("diff")
+        @script_one.stub!(:call).and_return(1)
+        @script_two.should_receive(:call).with("diff")
         @hook.run
       end
     end

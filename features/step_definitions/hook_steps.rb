@@ -8,7 +8,10 @@ end
 
 Given /^a hook directory with:$/ do |script_table|
   script_table.hashes.each do |hash|
-    add_script(File.join(@hook.script_dir, hash[:name]), hash[:result].to_i)
+    script = Raincoat::Script.new(hash[:name], hash[:result].to_i)
+    File.open(File.join(@hook.script_dir, "#{hash[:name]}.rb"), 'w') do |f|
+      f.puts(script.to_s)
+    end
   end
 end
 
