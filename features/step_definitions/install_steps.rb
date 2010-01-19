@@ -1,4 +1,5 @@
 Given /^I am in the project directory$/ do
+  @original_dir = FileUtils.pwd
   FileUtils.chdir PROJECT_DIR
 end
 
@@ -12,4 +13,8 @@ end
 
 Then /^there should be a "([^\"]*)" script directory$/ do |hook_name|
   File.directory?(File.join(SCRIPT_DIR, hook_name)).should be_true
+end
+
+Then /^I change directories back$/ do
+  FileUtils.chdir @original_dir
 end

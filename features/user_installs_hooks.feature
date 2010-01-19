@@ -13,8 +13,9 @@ Feature: user install hooks in a new git project
     When I install the scripts in the script directory
     Then there should be a "<hook_name>" hook
     And there should be a "<hook_name>" script directory
+    Then I change directories back
 
   Examples:
-    | hook_name  |
-    | pre-commit |
-    
+    | hook_name   |
+    | pre-commit  |
+    | post-commit |
