@@ -11,3 +11,10 @@ Feature: hooks runs all of the scripts in the hook's directory
     Given an empty hook directory
     When the hook is called
     Then the hook should exit with a 0 exit status
+
+  Scenario: One failing script in the hook directory
+    Given a hook directory with:
+    | name  | result |
+    | first |      1 |
+    When the hook is called
+    Then the hook should exit with a 1 exit status

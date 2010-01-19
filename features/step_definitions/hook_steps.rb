@@ -6,10 +6,16 @@ Given /^an empty hook directory$/ do
   FileUtils.rm Dir.glob(File.join(@hook.script_dir, "*.rb"))
 end
 
+Given /^a hook directory with:$/ do |script_table|
+  script_table.hashes.each do |hash|
+    add_script(File.join(@hook.script_dir, hash[:name]), hash[:result].to_i)
+  end
+end
+
 When /^the hook is called$/ do
   @exit_status = @hook.run
 end
 
-Then /^the hook should exit with a 0 exit status$/ do
-  @exit_status.should == 0
+Then /^the hook should exit with a (\d+) exit status$/ do |code|
+  @exit_status.should == code.to_i
 end
