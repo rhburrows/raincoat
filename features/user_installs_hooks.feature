@@ -15,6 +15,6 @@ Feature: user install hooks in a new git project
     And there should be a "<hook_name>" script directory
 
   Examples:
-    | hook_name |
+    | hook_name  |
     | pre-commit |
-
+    

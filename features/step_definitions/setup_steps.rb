@@ -11,7 +11,7 @@ end
 
 Given /^a new git project$/ do
   original_dir = FileUtils.pwd
-  FileUtils.chdir("tmp")
+  FileUtils.chdir(PROJECT_DIR)
   `git init`
   FileUtils.chdir(original_dir)
 end
