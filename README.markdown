@@ -61,6 +61,10 @@ representation of the change that is being made in git. For example in
 the case of `pre-commit` it is the difference between the files that
 are currently staged and the `HEAD` commit.
 
+If the `call` method returns `false` then the operation will be
+unsuccessful and git will not proceed. If it returns `true` the hook
+will have a `0` exit status so git can continue.
+
 ## TODO
 
 * Add support for additional git-hooks
