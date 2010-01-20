@@ -63,6 +63,4 @@ are currently staged and the `HEAD` commit.
 
 ## TODO
 
-* Make return values from scripts more intuitive
-* Add a message notifying the user when the scripts failed
 * Add support for additional git-hooks

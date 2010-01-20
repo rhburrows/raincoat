@@ -24,10 +24,16 @@ module Raincoat
     #                   This number becomes the overall exit status of the hook.
     def run
       diff = git_diff.freeze
-      result = scripts.inject(true) do |acc, script|
-        script.call(diff) && acc
+      success = scripts.inject(true) do |result, script|
+        script.call(diff) && result
       end
-      result ? 0 : 1
+      if success
+        0
+      else
+        $stderr.puts "Operation unsuccessful!"
+        $stderr.puts "One or more of your raincoat scripts failed"
+        1
+      end
     end
 
     # This loads all of the scripts in the script dir and instantiates the
