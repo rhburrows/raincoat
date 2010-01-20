@@ -4,6 +4,7 @@ module Raincoat
   describe ScriptWriter do
     before(:each) do
       @writer = ScriptWriter.new("test")
+      $stderr = StringIO.new
     end
 
     describe "#write" do
@@ -45,6 +46,12 @@ module Raincoat
       it "doesn't create the script directory if it already exists" do
         File.stub!(:directory?).and_return(true)
         FileUtils.should_not_receive(:mkdir_p)
+        @writer.write("test-file")
+      end
+
+      it "fails if git already has the hook" do
+        File.stub!(:exists?).and_return(true)
+        File.should_not_receive(:open)
         @writer.write("test-file")
       end
     end

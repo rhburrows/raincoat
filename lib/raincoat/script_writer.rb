@@ -27,6 +27,12 @@ module Raincoat
     def write(hook_name)
       init_script_directory(File.join(@script_dir, hook_name))
       path = File.join(GIT_HOOK_DIR, hook_name)
+      
+      if File.exists?(path)
+        $stderr.puts "#{path} already exists. Please delete it and re-run the installation."
+        return
+      end
+
       File.open(path, "w") do |f|
         f.puts(build_script(hook_name))
       end
