@@ -61,6 +61,7 @@ class ActiveHook < Raincoat::Hook
   end
 end
 
+puts "RUNNING!"
 exit(ActiveHook.new("<%= script_dir %>").run)
 
 TEMPLATE
