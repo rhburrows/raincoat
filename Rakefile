@@ -10,7 +10,9 @@ spec = Gem::Specification.new do |s|
   s.email = 'rhburrows@gmail.com'
   s.homepage = 'http://github.com/rhburrows/raincoat'
   s.require_path = 'lib'
-  s.files = %w[LICENSE README.markdown Rakefile] + Dir.glob("lib/**/*")
+  s.files = %w[LICENSE README.markdown Rakefile] + Dir.glob("{bin,lib}/**/*")
+  s.bindir = 'bin'
+  s.executables = ['raincoat']
 end
 
 spec_file = "#{spec.name}.gemspec"
@@ -46,7 +48,7 @@ rescue LoadError
   task(:spec){ $stderr.puts "`gem install rspec` to run specs." }
 end
 
-task :default => :spec
+task :default => [:spec, :features]
 
 begin
   require 'cucumber'

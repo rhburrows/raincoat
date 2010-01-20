@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+raincoat_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(raincoat_dir) unless $LOAD_PATH.include?(raincoat_dir)
+require 'raincoat'
+
+unless ARGV[0] == 'install'
+  $stderr.puts "raincoat only supports installation. Try `raincoat install <script_dir>`"
+  exit 1
+end
+
+script_dir = ARGV[1] || "script"
+Raincoat::Installer.new(script_dir).install
