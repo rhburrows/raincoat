@@ -24,9 +24,10 @@ module Raincoat
     #                   This number becomes the overall exit status of the hook.
     def run
       diff = git_diff.freeze
-      scripts.inject(0) do |result, script|
-        result + script.call(diff)
+      result = scripts.inject(true) do |acc, script|
+        script.call(diff) && acc
       end
+      result ? 0 : 1
     end
 
     # This loads all of the scripts in the script dir and instantiates the

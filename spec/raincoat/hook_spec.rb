@@ -15,8 +15,8 @@ module Raincoat
 
     describe "#run" do
       before(:each) do
-        @script_one = double("Script 1", :call => 0)
-        @script_two = double("Script 2", :call => 0)
+        @script_one = double("Script 1", :call => true)
+        @script_two = double("Script 2", :call => true)
         @hook.stub!(:scripts).and_return([@script_one, @script_two])
         @hook.stub!(:git_diff).and_return("diff")
       end
