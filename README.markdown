@@ -1,4 +1,4 @@
-## Raincoat
+# Raincoat
 
     http://github.com/rhburrows/raincoat
 
