@@ -68,3 +68,4 @@ will have a `0` exit status so git can continue.
 ## TODO
 
 * Add support for additional git-hooks
+* Take out annoying 'RUNNING' statement
