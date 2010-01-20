@@ -2,7 +2,7 @@ require 'rubygems'
 
 spec = Gem::Specification.new do |s|
   s.name = 'raincoat'
-  s.version = '0.1'
+  s.version = '0.1.1'
   s.platform = Gem::Platform::RUBY
   s.summary = 'Easily define git-hooks that can be passed with your project'
   s.description = s.summary
