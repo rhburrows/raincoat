@@ -54,7 +54,7 @@ module Raincoat
 
       it "instantiates and runs the hook with the correct directory" do
         script = writer.build_script("git-command")
-        script.should match(/ActiveHook\.new\(.+, ?"gitcommand"\)\.run/)
+        script.should match(/ActiveHook\.new\(.+, ?"git-command"\)\.run/)
       end
 
       it "loads the config_file" do

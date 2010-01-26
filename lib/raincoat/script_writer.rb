@@ -59,7 +59,7 @@ class ActiveHook < Raincoat::Hook
   end
 end
 
-exit(ActiveHook.new("<%= @config_file %>", "<%= hook_type %>").run)
+exit(ActiveHook.new("<%= @config_file %>", "<%= hook_name %>").run)
 
 TEMPLATE
   end

@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{raincoat}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Burrows"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.description = %q{Easily define git-hooks that can be passed with your project}
   s.email = %q{rhburrows@gmail.com}
   s.executables = ["raincoat"]
-  s.files = ["LICENSE", "README.markdown", "Rakefile", "bin/raincoat", "lib/raincoat/diff_utils.rb", "lib/raincoat/hook.rb", "lib/raincoat/installer.rb", "lib/raincoat/script_writer.rb", "lib/raincoat.rb"]
+  s.files = ["LICENSE", "README.markdown", "Rakefile", "bin/raincoat", "lib/raincoat/diff_utils.rb", "lib/raincoat/script_writer.rb", "lib/raincoat/installer.rb", "lib/raincoat/hook.rb", "lib/raincoat.rb"]
   s.homepage = %q{http://github.com/rhburrows/raincoat}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
