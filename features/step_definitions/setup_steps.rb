@@ -1,22 +1,19 @@
-PROJECT_DIR = "tmp"
-SCRIPT_DIR = "scripts"
-
-Given /^a clean script directory$/ do
-  clean_dir(File.join(PROJECT_DIR, SCRIPT_DIR))
-end
-
-Given /^a clean project directory$/ do
-  clean_dir(PROJECT_DIR)
+Given /^I am in the temp directory$/ do
+  $root ||= FileUtils.pwd
+  unless File.exists?(File.join($root, "tmp"))
+    FileUtils.mkdir(File.join($root, "tmp"))
+  end
+  FileUtils.chdir(File.join($root, "tmp"))
 end
 
 Given /^a new git project$/ do
-  original_dir = FileUtils.pwd
-  FileUtils.chdir(PROJECT_DIR)
   `git init`
-  FileUtils.chdir(original_dir)
 end
 
-def clean_dir(directory)
-  FileUtils.remove_dir(directory) unless !File.directory? directory
-  FileUtils.mkdir_p(directory)
+Given /^the "(.+)" directory is empty$/ do |dir|
+  FileUtils.rm_r Dir.glob(File.join(dir, '*'))
+end
+
+Given /^the directory is clean$/ do
+  Given "the \"#{FileUtils.pwd}\" directory is empty"
 end

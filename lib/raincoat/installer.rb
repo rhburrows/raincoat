@@ -9,21 +9,16 @@ module Raincoat
 
     # Create an installer that watches scripts contained within script_dir
     #
-    # @param [String] script_dir the path to the directory where the various
-    #                 scripts that raincoat will run are put.
-    def initialize(script_dir)
-      @script_dir = script_dir
+    # @param [String] config_file the path to the raincoat configuration file
+    def initialize(config_file = nil)
+      @config_file = config_file
     end
     
     # Install raincoat hooks in the current project for each of the supported
     # git-hook types. This will create the corresponding script directory if
     # it doesn't exist
     def install
-      unless File.directory?(@script_dir)
-        FileUtils.mkdir_p(@script_dir)
-      end
-
-      writer = ScriptWriter.new(@script_dir)
+      writer = ScriptWriter.new(@config_file)
       HOOKS.each do |hook|
         writer.write(hook)
       end

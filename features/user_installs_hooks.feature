@@ -5,15 +5,14 @@ Feature: user install hooks in a new git project
   So that my scripts will run when I work with Git
 
   Background:
-  Given a clean project directory
+  Given I am in the temp directory
+  And the directory is clean
   And a new git project
 
   Scenario Outline: Install hooks in script directory
-    Given I am in the project directory
+    Given the ".git/hooks" directory is empty
     When I install the scripts in the script directory
     Then there should be a "<hook_name>" hook
-    And there should be a "<hook_name>" script directory
-    Then I change directories back
 
   Examples:
     | hook_name   |

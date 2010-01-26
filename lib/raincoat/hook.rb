@@ -10,10 +10,15 @@ module Raincoat
     # Create a new hook object that will execute the scripts located in
     # script_dir
     #
-    # @param [String] script_dir the path of the directory of scripts that
-    #                 this hook executes
-    def initialize(script_dir)
-      @script_dir = script_dir
+    # @param [String] config_file the location of the file for the configuration
+    def initialize(config_file, hook_dir)
+      if File.exists?(config_file)
+        config = YAML::load_file(config_file)
+      else
+        config = default_config
+      end
+      dir = config['script_dir'] || default_config['script_dir']
+      @script_dir = File.join(dir, hook_dir)
     end
 
     # This is called when the hook is executed by git's callbacks. It loads
@@ -62,6 +67,12 @@ module Raincoat
     # Just like ActiveSupport's #classify
     def class_name_for(file_name)
       file_name.split(/\//).last.sub(/\.rb$/, '').split(/_/).map{ |s| s.capitalize }.join('')
+    end
+
+    def default_config
+      {
+        'script_dir' => 'script'
+      }
     end
   end
 end

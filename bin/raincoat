@@ -4,9 +4,9 @@ $LOAD_PATH.unshift(raincoat_dir) unless $LOAD_PATH.include?(raincoat_dir)
 require 'raincoat'
 
 unless ARGV[0] == 'install'
-  $stderr.puts "raincoat only supports installation. Try `raincoat install <script_dir>`"
+  $stderr.puts "raincoat only supports installation. Try `raincoat install <config_file>`"
   exit 1
 end
 
-script_dir = ARGV[1] || "script"
-Raincoat::Installer.new(script_dir).install
+script_dir = ARGV[1]
+Raincoat::Installer.new.install

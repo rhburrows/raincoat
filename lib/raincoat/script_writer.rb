@@ -10,13 +10,16 @@ module Raincoat
     # The directory where git stores it's hooks
     GIT_HOOK_DIR = File.join(".git","hooks")
 
+    # The raincoat configuration file
+    attr_writer :config_file
+
     # Create a new ScriptWriter that creates hooks that executes the scripts
     # in script_dir
     #
     # @param [String] script_dir the path to the directory where the various
     #                 scripts exist
-    def initialize(script_dir)
-      @script_dir = script_dir
+    def initialize(config_file = nil)
+      @config_file = config_file || 'raincoat.yml'
     end
 
     # Write a new hook to the git directory called hook_name. Also, if there
@@ -25,7 +28,6 @@ module Raincoat
     #
     # @param [String] hook_name the name of the git-hook to write this file for
     def write(hook_name)
-      init_script_directory(File.join(@script_dir, hook_name))
       path = File.join(GIT_HOOK_DIR, hook_name)
       
       if File.exists?(path)
@@ -44,16 +46,7 @@ module Raincoat
     # @param [String] hook_name the name of the git-hook to build a script for
     def build_script(hook_name)
       hook_type = hook_name.sub(/-/, '')
-      script_dir = File.join(@script_dir, hook_name)
       ERB.new(DEFAULT_TEMPLATE).result(binding)
-    end
-
-    private
-
-    def init_script_directory(dir)
-      unless File.directory? dir
-        FileUtils.mkdir_p dir
-      end
     end
 
     DEFAULT_TEMPLATE = <<TEMPLATE
@@ -67,7 +60,7 @@ class ActiveHook < Raincoat::Hook
   end
 end
 
-exit(ActiveHook.new("<%= script_dir %>").run)
+exit(ActiveHook.new("<%= @config_file %>", "<%= hook_type %>").run)
 
 TEMPLATE
   end
