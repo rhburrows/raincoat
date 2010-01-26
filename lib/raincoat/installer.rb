@@ -7,7 +7,8 @@ module Raincoat
     # The list of currently supported hooks
     HOOKS = [ "pre-commit", "post-commit" ]
 
-    # Create an installer that watches scripts contained within script_dir
+    # Create an installer that can install hooks to read the specified config
+    # file.
     #
     # @param [String] config_file the path to the raincoat configuration file
     def initialize(config_file = nil)

@@ -13,11 +13,10 @@ module Raincoat
     # The raincoat configuration file
     attr_writer :config_file
 
-    # Create a new ScriptWriter that creates hooks that executes the scripts
-    # in script_dir
+    # Create a new ScriptWriter that creates hooks for the specified config_file
+    # If no config file is specified it will use the default of 'raincoat.yml'
     #
-    # @param [String] script_dir the path to the directory where the various
-    #                 scripts exist
+    # @param [String] config_file the location of the configuration file
     def initialize(config_file = nil)
       @config_file = config_file || 'raincoat.yml'
     end

@@ -28,8 +28,8 @@ root directory of your project.
 
     raincoat install
 
-At this time existing git-hooks that you have may be wiped out so be
-sure to back up any hooks that you want to save.
+Make sure to back up any existing git hooks you have first as raincoat
+will be writing its own hooks at this point.
 
 Raincoat works by looking in your script directory for the directory
 with the same name as the hook being executed, and then it runs each
@@ -38,13 +38,8 @@ executed it will look in `<script_dir>/pre-commit` and run each script
 in there.
 
 By default the script directory is set to `script` but a different
-script directory can be specified by passing it to the
-install command:
-
-    raincoat install hooks
-
-This would create a hooks directory where all of the hook scripts
-could be placed.
+script directory can be specified by defining it in the configuration
+file (see below).
 
 ## Anatomy of a Raincoat Script
 
@@ -65,7 +60,24 @@ If the `call` method returns `false` then the operation will be
 unsuccessful and git will not proceed. If it returns `true` the hook
 will have a `0` exit status so git can continue.
 
+## Configuring Raincoat
+
+Raincoat is configured through a YAML file. By default raincoat checks
+the root directory of the project for `raincoat.yml`, but a different
+configuration file can be specified when installing raincoat into the
+project by passing it to the install command
+
+    raincoat install my-config.yml
+
+Will install raincoat to read the my-config.yml configuration file.
+
+Raincoat can understand the following values in the configuration
+file.
+
+* `script_dir`: the base directory for raincoat scripts. The actual
+  scripts will be in something like `<script_dir>/precommit`
+
 ## TODO
 
 * Add support for additional git-hooks
-* Take out annoying 'RUNNING' statement
+* Change diff passed to hooks from raw string to real object

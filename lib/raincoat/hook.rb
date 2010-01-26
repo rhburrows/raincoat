@@ -8,9 +8,11 @@ module Raincoat
     attr_reader :script_dir
 
     # Create a new hook object that will execute the scripts located in
-    # script_dir
+    # specified directory.
     #
     # @param [String] config_file the location of the file for the configuration
+    # @param [String] hook_dir the directory within the main script dir for this
+    #                 specific hook
     def initialize(config_file, hook_dir)
       if File.exists?(config_file)
         config = YAML::load_file(config_file)
