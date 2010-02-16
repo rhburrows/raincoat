@@ -53,7 +53,7 @@ module Raincoat
 require 'rubygems'
 require 'raincoat'
 
-class ActiveHook < Raincoat::Hook
+class ActiveHook < Raincoat::Hook::Base
   def git_diff
     Raincoat::DiffUtils.<%= hook_type %>_diff
   end

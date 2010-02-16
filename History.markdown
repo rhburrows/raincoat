@@ -1,3 +1,7 @@
+# Version 0.2.2 / 2010-2-15
+* Minor Changes
+    * Add rake tasks to trigger raincoat precommit and postcommit hooks
+
 # Version 0.2.1 / 2010-1-26
 * Bug Fixes
     * Change the script directories back to not stripping the '-' from

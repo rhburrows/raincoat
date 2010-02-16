@@ -1,7 +1,11 @@
 CONFIG_FILE = "raincoat.yml"
 
 Given /^an existing hook$/ do
-  @hook = Raincoat::Hook.new(CONFIG_FILE, "precommit")
+  Given "an existing \"precommit\" hook"
+end
+
+Given /^an existing "precommit" hook$/ do
+  @hook = TestHook.new(Raincoat::Hook::Precommit.new(CONFIG_FILE))
 end
 
 Given /^an empty hook directory$/ do
@@ -21,8 +25,8 @@ Given /^a hook directory with:$/ do |script_table|
   end
 end
 
-When /^I create a hook$/ do
-  Given "an existing hook"
+When /^I create a "([^\"]*)" hook$/ do |hook_type|
+  Given "an existing \"#{hook_type}\" hook"
 end
 
 When /^the hook is called$/ do
@@ -35,4 +39,8 @@ end
 
 Then /^the hook should check for scripts in "([^\"]*)"$/ do |directory|
   @hook.script_dir.should == directory
+end
+
+Then /^the hook should run$/ do
+  @hook.has_run?.should be_true
 end

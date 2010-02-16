@@ -13,5 +13,5 @@ Feature: user configures raincoat through YAML configuration file
       """
       script_dir: script/raincoat
       """
-    And I create a hook
+    And I create a "precommit" hook
     Then the hook should check for scripts in "script/raincoat/precommit"
