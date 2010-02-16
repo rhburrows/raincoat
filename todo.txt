@@ -4,6 +4,7 @@
 - [X] Refactor configuration reading so its only one place
 - [ ] Convert Code to pass hooks a repo object instead of diff string
 - [ ] Add a --force option to bypasses existing .git/hook warnings
+- [ ] Review metric_fu results on caliper and make adjustments to code
 - [ ] Standardize terms (hook, script, etc.) and use consistantly
   throughout project & documentation
 - [ ] Document all classes with YARV
