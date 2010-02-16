@@ -5,7 +5,7 @@ Given /^an existing hook$/ do
 end
 
 Given /^an existing "precommit" hook$/ do
-  @hook = TestHook.new(Raincoat::Hook::Precommit.new)
+  @hook = Raincoat::Hook::Precommit.new
 end
 
 Given /^an empty hook directory$/ do
@@ -39,8 +39,4 @@ end
 
 Then /^the hook should check for scripts in "([^\"]*)"$/ do |directory|
   @hook.script_dir.should == directory
-end
-
-Then /^the hook should run$/ do
-  @hook.has_run?.should be_true
 end
