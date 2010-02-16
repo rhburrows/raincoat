@@ -1,6 +1,9 @@
 # Version 0.2.2 / 2010-2-15
 * Minor Changes
-    * Add rake tasks to trigger raincoat precommit and postcommit hooks
+    * Add rake tasks to trigger raincoat precommit and postcommit
+    hooks
+* Refactoring
+    * Configuration made into object so its only read one place
 
 # Version 0.2.1 / 2010-1-26
 * Bug Fixes

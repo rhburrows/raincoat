@@ -76,8 +76,3 @@ file.
 
 * `script_dir`: the base directory for raincoat scripts. The actual
   scripts will be in something like `<script_dir>/precommit`
-
-## TODO
-
-* Add support for additional git-hooks
-* Change diff passed to hooks from raw string to real object

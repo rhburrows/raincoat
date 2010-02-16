@@ -1,0 +1,21 @@
+* For Version 0.3
+- [X] Add rake tasks to trigger raincoat precommit and postcommit
+  hooks
+- [X] Refactor configuration reading so its only one place
+- [ ] Convert Code to pass hooks a repo object instead of diff string
+- [ ] Add a --force option to bypasses existing .git/hook warnings
+- [ ] Standardize terms (hook, script, etc.) and use consistantly
+  throughout project & documentation
+- [ ] Document all classes with YARV
+- [ ] Write usage documentation
+- [ ] Write Github page (set as project homepage)
+- [ ] Copy these changes into History.markdown
+- [ ] Come up with sample raincoat scripts
+- [ ] Bump version number
+- [ ] Tag git commit with version number
+
+* Future
+- [ ] Update Install tool to allow installation of only certain hooks
+- [ ] Come up with a way to add non-raincoat (or non-ruby) scripts
+- [ ] Research various gem packaging libraries and/or update rake
+  script to bump version and handle releases
