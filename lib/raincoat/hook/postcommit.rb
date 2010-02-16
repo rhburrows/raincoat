@@ -1,8 +1,8 @@
 module Raincoat
   module Hook
     class Postcommit < Base
-      def initialize(config_file, hook_dir = "postcommit")
-        super(config_file, hook_dir)
+      def initialize(hook_dir = "postcommit")
+        super(hook_dir)
       end
 
       def git_diff

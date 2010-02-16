@@ -4,24 +4,19 @@ module Raincoat
   #
   # @author Ryan Burrows
   class Installer
-    # The list of currently supported hooks
-    HOOKS = [ "pre-commit", "post-commit" ]
 
-    # Create an installer that can install hooks to read the specified config
-    # file.
-    #
-    # @param [String] config_file the path to the raincoat configuration file
-    def initialize(config_file = nil)
-      @config_file = config_file
-    end
+    HOOKS = {
+      "pre-commit"  => Raincoat::Hook::Precommit,
+      "post-commit" => Raincoat::Hook::Postcommit
+    }
     
     # Install raincoat hooks in the current project for each of the supported
     # git-hook types. This will create the corresponding script directory if
     # it doesn't exist
     def install
-      writer = ScriptWriter.new(@config_file)
-      HOOKS.each do |hook|
-        writer.write(hook)
+      writer = ScriptWriter.new
+      HOOKS.each do |(hook_name, hook_type)|
+        writer.write(hook_name, hook_type)
       end
     end
   end

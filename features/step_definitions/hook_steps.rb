@@ -5,7 +5,7 @@ Given /^an existing hook$/ do
 end
 
 Given /^an existing "precommit" hook$/ do
-  @hook = TestHook.new(Raincoat::Hook::Precommit.new(CONFIG_FILE))
+  @hook = TestHook.new(Raincoat::Hook::Precommit.new)
 end
 
 Given /^an empty hook directory$/ do

@@ -15,3 +15,12 @@ Feature: user configures raincoat through YAML configuration file
       """
     And I create a "precommit" hook
     Then the hook should check for scripts in "script/raincoat/precommit"
+
+  Scenario: Default configuration file is "raincoat.yml"
+    When the "RAINCOAT_CONFIG" environment variable is not set
+    Then the configuration should be read from "raincoat.yml"
+
+  Scenario: Configuration file is from the RAINCOAT_CONFIG environment variable
+    When the "RAINCOAT_CONFIG" environment variable is "file.yml"
+    Then the configuration should be read from "file.yml"
+    

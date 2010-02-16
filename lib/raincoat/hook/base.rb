@@ -15,14 +15,9 @@ module Raincoat
       #                 configuration
       # @param [String] hook_dir the directory within the main script dir for
       #                 this specific hook
-      def initialize(config_file, hook_dir)
-        if File.exists?(config_file)
-          config = YAML::load_file(config_file)
-        else
-          config = default_config
-        end
-        dir = config['script_dir'] || default_config['script_dir']
-        @script_dir = File.join(dir, hook_dir)
+      def initialize(hook_dir)
+        @config = Raincoat::Configuration.new
+        @script_dir = File.join(@config.script_dir, hook_dir)
       end
 
       # This is called when the hook is executed by git's callbacks. It loads
@@ -75,12 +70,6 @@ module Raincoat
         file_name.split(/\//).last.sub(/\.rb$/, '').split(/_/).map do |s|
           s.capitalize
         end.join('')
-      end
-
-      def default_config
-        {
-          'script_dir' => 'script'
-        }
       end
     end
   end

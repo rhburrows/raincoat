@@ -3,7 +3,6 @@ require 'fileutils'
 class TestHook
   def initialize(hook)
     @tmp_file = File.join(FileUtils.pwd, "hook.#{rand(1000)}.tmp")
-    puts "FILE NAME: #{@tmp_file}"
     @hook = hook
   end
 

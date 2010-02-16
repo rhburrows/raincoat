@@ -1,8 +1,8 @@
 module Raincoat
   module Hook
     class Precommit < Base
-      def initialize(config_file, hook_dir = "precommit")
-        super(config_file, hook_dir)
+      def initialize(hook_dir = "precommit")
+        super(hook_dir)
       end
 
       def git_diff

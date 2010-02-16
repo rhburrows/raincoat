@@ -1,5 +1,5 @@
 When /^I install the scripts in the script directory$/ do
-  Raincoat::Installer.new(CONFIG_FILE).install
+  Raincoat::Installer.new.install
 end
 
 Then /^there should be a "([^\"]*)" hook$/ do |hook_name|

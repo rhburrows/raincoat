@@ -6,41 +6,13 @@ class ScriptTwo; end
 module Raincoat
   module Hook
     describe Base do
-      let(:hook){ Base.new('raincoat.yml', 'precommit') }
+      let(:hook){ Base.new('precommit') }
 
       describe "configuration" do
-        context "the configuration file doesn't exist" do
-          before do
-            File.stub!(:exists?).and_return(false)
-            @hook = Base.new("raincoat.yml", 'precommit')
-          end
-
-          it "defaults the script_dir to 'script'" do
-            @hook.script_dir.should == 'script/precommit'
-          end
-        end
-
-        context "the configuration file does exist" do
-          before do
-            File.stub!(:exists?).and_return(true)
-            YAML.stub!(:load_file).and_return({ 'script_dir' => 'file_dir' })
-          end
-
-          it "reads the yaml file" do
-            YAML.should_receive(:load_file)
-            hook = Base.new('raincoat.yml', 'precommit')
-          end
-
-          it "uses the script_dir from the file" do
-            hook = Base.new('raincoat.yml', 'precommit')
-            hook.script_dir.should == 'file_dir/precommit'
-          end
-
-          it "defaults the script_dir if its not in the file" do
-            YAML.stub!(:load_file).and_return({ })
-            hook = Base.new('raincoat.yml', 'precommit')
-            hook.script_dir.should == 'script/precommit'
-          end
+        it "creates a new configuration object when instantiated" do
+          config = mock("config", :script_dir => '')
+          Raincoat::Configuration.should_receive(:new).and_return(config)
+          Base.new("hook")
         end
       end
 

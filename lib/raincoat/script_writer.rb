@@ -10,23 +10,12 @@ module Raincoat
     # The directory where git stores it's hooks
     GIT_HOOK_DIR = File.join(".git","hooks")
 
-    # The raincoat configuration file
-    attr_writer :config_file
-
-    # Create a new ScriptWriter that creates hooks for the specified config_file
-    # If no config file is specified it will use the default of 'raincoat.yml'
-    #
-    # @param [String] config_file the location of the configuration file
-    def initialize(config_file = nil)
-      @config_file = config_file || 'raincoat.yml'
-    end
-
     # Write a new hook to the git directory called hook_name. Also, if there
     # isn't a corresponding 'hook_name' directory in the script_dir it will
     # be created.
     #
     # @param [String] hook_name the name of the git-hook to write this file for
-    def write(hook_name)
+    def write(hook_name, hook_type)
       path = File.join(GIT_HOOK_DIR, hook_name)
       
       if File.exists?(path)
@@ -35,7 +24,7 @@ module Raincoat
       end
 
       File.open(path, "w") do |f|
-        f.puts(build_script(hook_name))
+        f.puts(build_script(hook_type))
       end
       FileUtils.chmod 0777, path
     end
@@ -43,8 +32,7 @@ module Raincoat
     # Generate the script that is going to be written in the git-hook file.
     #
     # @param [String] hook_name the name of the git-hook to build a script for
-    def build_script(hook_name)
-      hook_type = hook_name.sub(/-/, '')
+    def build_script(hook_type)
       ERB.new(DEFAULT_TEMPLATE).result(binding)
     end
 
@@ -53,13 +41,7 @@ module Raincoat
 require 'rubygems'
 require 'raincoat'
 
-class ActiveHook < Raincoat::Hook::Base
-  def git_diff
-    Raincoat::DiffUtils.<%= hook_type %>_diff
-  end
-end
-
-exit(ActiveHook.new("<%= @config_file %>", "<%= hook_name %>").run)
+exit(<%= hook_type.name %>.new.run)
 
 TEMPLATE
   end
