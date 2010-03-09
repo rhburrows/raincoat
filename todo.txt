@@ -18,5 +18,4 @@
 * Future
 - [ ] Update Install tool to allow installation of only certain hooks
 - [ ] Come up with a way to add non-raincoat (or non-ruby) scripts
-- [ ] Research various gem packaging libraries and/or update rake
-  script to bump version and handle releases
+- [ ] Rake tasks to bump version and handle releases

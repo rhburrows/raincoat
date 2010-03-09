@@ -29,9 +29,9 @@ module Raincoat
       #                   This number becomes the overall exit status of the
       #                   hook.
       def run
-        diff = git_diff.freeze
+        c = changes
         success = scripts.inject(true) do |result, script|
-          script.call(diff) && result
+          script.call(c) && result
         end
         if success
           0
@@ -40,6 +40,10 @@ module Raincoat
           $stderr.puts "One or more of your raincoat scripts failed"
           1
         end
+      end
+
+      def changes
+        ""
       end
 
       # This loads all of the scripts in the script dir and instantiates the
@@ -51,12 +55,6 @@ module Raincoat
           Kernel.load(e)
           a + [initialize_script(e)]
         end
-      end
-
-      # Should be overridden by subclass to express the diff between the two
-      # git states that are being transitioned between.
-      def git_diff
-        ""
       end
 
       private

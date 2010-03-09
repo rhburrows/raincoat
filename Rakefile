@@ -1,5 +1,11 @@
 require 'rubygems'
-require 'raincoat/rake/tasks'
+
+begin
+  require 'raincoat'
+  require 'raincoat/rake/tasks'
+rescue LoadError
+  $stderr.puts "Missing raincoat. Raincoat tasks will be ignored"
+end
 
 spec = Gem::Specification.new do |s|
   s.name = 'raincoat'

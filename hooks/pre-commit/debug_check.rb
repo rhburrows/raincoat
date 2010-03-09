@@ -1,5 +1,9 @@
+require 'rubygems'
+require 'ruby-debug'
+
 class DebugCheck
-  def call(diff)
+  def call(repo)
+    diff = repo.commits.last.to_patch
     diff.split(/^--- .+$/).inject(true) do |result, d|
       if d.match(/^\+.*debugger/)
         filename = d.match(/^\+\+\+ b\/(.+)$/)[1]
