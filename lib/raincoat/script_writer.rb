@@ -1,5 +1,5 @@
 require 'erb'
-
+require 'fileutils'
 module Raincoat
   # This class generates and writes out the actual git-hook files into the
   # project's .git directory.
