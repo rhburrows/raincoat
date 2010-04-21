@@ -6,7 +6,7 @@ module Raincoat
       # correct diff string so that it can be passed to the hook scripts.
       #
       # @author Ryan Burrows
-      attr_reader :script_dir
+      attr_reader :script_dir, :git
 
       # Create a new hook object that will execute the scripts located in
       # specified directory.
@@ -15,9 +15,10 @@ module Raincoat
       #                 configuration
       # @param [String] hook_dir the directory within the main script dir for
       #                 this specific hook
-      def initialize(hook_dir)
+      def initialize(hook_dir, git = Git.new)
         @config = Raincoat::Configuration.new
         @script_dir = File.join(@config.script_dir, hook_dir)
+        @git = git
       end
 
       # This is called when the hook is executed by git's callbacks. It loads

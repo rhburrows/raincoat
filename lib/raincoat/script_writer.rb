@@ -17,7 +17,7 @@ module Raincoat
     # @param [String] hook_name the name of the git-hook to write this file for
     def write(hook_name, hook_type)
       path = File.join(GIT_HOOK_DIR, hook_name)
-      
+
       if File.exists?(path)
         $stderr.puts "#{path} already exists. Please delete it and re-run the installation."
         return

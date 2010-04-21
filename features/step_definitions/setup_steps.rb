@@ -8,12 +8,26 @@ end
 
 Given /^a new git project$/ do
   `git init`
+  `git ci -m 'head commit' --allow-empty`
 end
 
 Given /^the "(.+)" directory is empty$/ do |dir|
   FileUtils.rm_r Dir.glob(File.join(dir, '*'))
+  FileUtils.rm_r Dir.glob(File.join(dir, '.git'))
 end
 
 Given /^the directory is clean$/ do
   Given "the \"#{FileUtils.pwd}\" directory is empty"
+end
+
+Given /^I have staged changes in files:$/ do |table|
+  table.hashes.each do |file|
+    `echo 'change' > #{file['name']}`
+    `git add #{file['name']}`
+  end
+end
+
+Given /^I have one new empty file called "([^\"]*)" staged$/ do |file|
+  `touch #{file}`
+  `git add #{file}`
 end

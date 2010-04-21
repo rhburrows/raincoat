@@ -40,3 +40,11 @@ end
 Then /^the hook should check for scripts in "([^\"]*)"$/ do |directory|
   @hook.script_dir.should == directory
 end
+
+Then /^the list of changed files should include "([^\"]*)"$/ do |file_name|
+  @hook.changes.files.should include(file_name)
+end
+
+Then /^the raw changes should be:$/ do |diff|
+  @hook.changes.raw.chomp.should == diff
+end
